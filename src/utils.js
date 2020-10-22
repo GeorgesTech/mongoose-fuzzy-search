@@ -1,4 +1,4 @@
-import deburr from 'lodash.deburr';
+import {deburr} from 'lodash-es';
 import {sentenceTrigrams} from './n-gram.js';
 
 export const compose = (...fns) => (arg) => fns.reduceRight((acc, curr) => curr(acc), arg);

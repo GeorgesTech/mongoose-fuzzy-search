@@ -27,7 +27,7 @@ const insertManyMiddleware = (fields) => function (next, docs) {
     next();
 };
 
-export default (schema, {fields = {}} = {fields: {}}) => {
+export function plugin(schema, {fields = {}} = {fields: {}}) {
     
     const normalizedFields = normalizeFields(fields);
     const normalizeInput = normalizeInputFactory(fields);

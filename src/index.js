@@ -1,1 +1,3 @@
-export default from './plugin.js';
+import {plugin} from './plugin.js';
+
+export default plugin;

@@ -1,6 +1,6 @@
 import {test} from 'zora';
 import mongoose from 'mongoose';
-import plugin from '../../src/plugin.js';
+import {plugin} from '../../src/plugin.js';
 
 const LaurentRENARD = {
     lastname_tg: ['  r', ' re', 'ren', 'ena', 'nar', 'ard', 'rd ', 'd  '],
