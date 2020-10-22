@@ -13,18 +13,19 @@
 ```Javascript
 import fuzzy from 'mongoose-fuzzy-search';
 
-const User = mongoose.model('User', {
+const schema = new mongoose.Schema('User', {
     firstname: String,
     lastname: String
 });
 
 // add the plugin to the model and specify new fields on your schema to hold the trigrams projected 
-User.plugin(fuzzy, {
+schema.plugin(fuzzy, {
    fields:{
        lastname_tg: 'lastname', // equivalent to (doc) => doc.get('lastname')
        fullname_tg: (doc) => [doc.get('firstname'), doc.get('lastname') ].join(' ') 
    }
 })
+const User = mongoose.model('User', schema);
 
 const user = new User({
     firstname: 'Laurent',    
@@ -67,10 +68,16 @@ When passing a string, the pipeline calculate the similarity for each trigram fi
 However, you can combine various queries and give different weights to each of them:
 
 ```Javascript
-// ""''User.fuzzy({lastname_tg:})
-
+const results = await User.fuzzy({
+            lastname_tg: {
+                searchQuery: 'Renard' 
+            },
+            fullname_tg: {
+                searchQuery: 'repnge',
+                weight: 20
+            }
+});
 ```
-
 
 ### Notes
 
