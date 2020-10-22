@@ -1,4 +1,5 @@
-import node from 'rollup-plugin-node-resolve';
+import node from '@rollup/plugin-node-resolve';
+import cjs from '@rollup/plugin-commonjs';
 
 export default {
     input: './src/index.js',
@@ -10,5 +11,5 @@ export default {
         file: 'index.js',
         format: 'es'
     }],
-    plugins: [node()]
+    plugins: [node(), cjs()]
 };

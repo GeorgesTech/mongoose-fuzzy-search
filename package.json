@@ -2,8 +2,8 @@
   "name": "mongoose-fuzzy-search",
   "version": "0.0.1",
   "description": "fuzzy search based on trigrams for mongoose odm",
-  "main": "./index.cjs",
-  "module": "./index.js",
+  "main": "./index.js",
+  "type": "module",
   "exports": {
     "import": "./index.js",
     "require": "./index.cjs"
@@ -34,10 +34,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "lodash-es": "~4.17.15",
+    "@rollup/plugin-commonjs": "~15.1.0",
+    "@rollup/plugin-node-resolve": "~9.0.0",
+    "lodash.deburr": "~4.1.0",
     "mongoose": "~5.10.9",
     "rollup": "~2.32.1",
-    "rollup-plugin-node-resolve": "~5.2.0",
     "zora": "~4.0.0"
   }
 }
