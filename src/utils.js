@@ -59,7 +59,7 @@ export const normalizeInputFactory = (fields) => {
                 .filter(([key, value]) => fieldNames.includes(key))
                 .map(([key, value]) => {
                     const inputObject = typeof value === 'string' ? {searchQuery: value} : value;
-                    if (!inputObject?.searchQuery) {
+                    if (!(inputObject && inputObject.searchQuery)) {
                         throw new Error(`you must provide at least "searchQuery" property for the query field ${key}. Ex:
                         {
                             ${key}:{
