@@ -1,6 +1,6 @@
 {
   "name": "mongoose-fuzzy-search",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "fuzzy search based on trigrams for mongoose odm",
   "main": "./index.js",
   "type": "module",

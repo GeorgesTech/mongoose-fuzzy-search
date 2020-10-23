@@ -26,10 +26,10 @@ export const normalizeFields = (options = {}) => {
     );
 };
 
-export const createSchemaFields = (fields = {}) => Object.fromEntries(
+export const createSchemaFields = ({fields = {}, select = false} = {}) => Object.fromEntries(
     Object
         .keys(fields)
-        .map((key) => [key, {type: [String]}])
+        .map((key) => [key, {type: [String], select}])
 );
 
 export const getWords = compose(
@@ -56,7 +56,7 @@ export const normalizeInputFactory = (fields) => {
         return Object.fromEntries(
             Object
                 .entries(input)
-                .filter(([key, value]) => fieldNames.includes(key))
+                .filter(([key]) => fieldNames.includes(key))
                 .map(([key, value]) => {
                     const inputObject = typeof value === 'string' ? {searchQuery: value} : value;
                     if (!(inputObject && inputObject.searchQuery)) {

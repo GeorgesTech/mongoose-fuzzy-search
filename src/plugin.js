@@ -27,14 +27,14 @@ const insertManyMiddleware = (fields) => function (next, docs) {
     next();
 };
 
-export function plugin(schema, {fields = {}} = {fields: {}}) {
+export function plugin(schema, {fields = {}, select = false} = {}) {
     
     const normalizedFields = normalizeFields(fields);
     const normalizeInput = normalizeInputFactory(fields);
     const preSave = saveMiddleware(normalizedFields);
     const preInsertMany = insertManyMiddleware(normalizedFields);
     
-    schema.add(createSchemaFields(fields));
+    schema.add(createSchemaFields({fields, select}));
     schema.pre('save', preSave);
     schema.pre('insertMany', preInsertMany);
     

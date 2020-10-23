@@ -10,12 +10,25 @@ import {
 test(`utils`, (t) => {
     t.test(`create schema fields`, (t) => {
         t.eq(createSchemaFields({
-            foo: 'bar',
-            bim: (document) => document.get('woot')
+            fields: {
+                foo: 'bar',
+                bim: (document) => document.get('woot')
+            }
         }), {
-            foo: {type: [String]},
-            bim: {type: [String]}
-        });
+            foo: {type: [String], select: false},
+            bim: {type: [String], select: false}
+        }, 'trigrams should not be part of the projection by default');
+        
+        t.eq(createSchemaFields({
+            fields: {
+                foo: 'bar',
+                bim: (document) => document.get('woot')
+            },
+            select: true
+        }), {
+            foo: {type: [String], select: true},
+            bim: {type: [String], select: true}
+        }, 'trigrams should be part of the projection if option flag is true');
     });
     
     t.test(`normalizeInput`, (t) => {
