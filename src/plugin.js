@@ -1,4 +1,5 @@
 import {sentenceTrigrams} from './n-gram.js';
+import set from 'lodash.set';
 import {
     buildMatchClause,
     buildSimilarityClause,
@@ -18,10 +19,10 @@ const insertManyMiddleware = (fields) => function (next, docs) {
     const Ctr = this;
     docs.forEach((doc) => {
         for (const [path, fn] of Object.entries(fields)) {
+            // we create an instance so the document given to the getter will have the Document API
             const instance = new Ctr(doc);
-            instance.set(path, sentenceTrigrams(fn(instance)));
-            // mutate doc in place
-            Object.assign(doc, instance.toObject());
+            // mutate doc in place only at trigram paths
+            set(doc, path, sentenceTrigrams(fn(instance)));
         }
     });
     next();
